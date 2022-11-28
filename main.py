@@ -1,22 +1,13 @@
-import logging
-
-logging.basicConfig(filename="/tmp/template.log",
-                    format='[Template] %(asctime)s %(levelname)s %(message)s',
-                    filemode='w+',
-                    force=True)
-logger=logging.getLogger()
-logger.setLevel(logging.INFO) # can be changed to logging.DEBUG for debugging issues
-
 class Plugin:
-    # A normal method. It can be called from JavaScript using call_plugin_function("method_1", argument1, argument2)
-    async def add(self, left, right):
-        return left + right
+        # The backend function that we called above
+    async def change_tdp(watts):
+        power = watts *1000
+        ./backend/ryzenadj --stapm-limit=$power --fast-limit=$power --slow-limit=$power
 
-    # Asyncio-compatible long-running code, executed in a task when the plugin is loaded
-    async def _main(self):
-        logger.info("Hello World!")
-    
-    # Function called first during the unload process, utilize this to handle your plugin being removed
-    async def _unload(self):
-        logger.info("Goodbye World!")
-        pass
+        # Function that can contain long-running code that will stay alive for the entire duration of your plugin
+    #async def _main(self):
+       # pass
+
+     # Function used to clean up a plugin when it's told to unload by Decky-Loader
+    #async def _unload(self):
+     #   pass
